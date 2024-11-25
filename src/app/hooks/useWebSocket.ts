@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { useRoomId } from './useRoomId'
+import { toast } from 'sonner'
 
 type ConnectionStatus = 'connecting' | 'connected' | 'disconnected'
 
@@ -36,6 +37,7 @@ export function useWebSocket() {
         }
 
         ws.current.onerror = (error) => {
+            toast.error(`WebSocket error: ${error}`)
             console.error('WebSocket error:', error)
             setConnectionStatus('disconnected')
         }
@@ -43,7 +45,12 @@ export function useWebSocket() {
         ws.current.onmessage = (event) => {
             const message = JSON.parse(event.data)
             if (message.type == 'roomCreated') {
+                toast.success('Room Created Successfully')
                 setCurrentRoomId(message.payload.roomId);
+            }
+            console.log(message)
+            if (message.type == 'roomJoined') {
+                toast.success('Room Joined Successfully')
             }
 
             setLastMessage(message)
@@ -71,7 +78,8 @@ export function useWebSocket() {
             }
             ws.current.send(JSON.stringify(message))
         } else {
-            console.error('WebSocket is not open. Current state:', ws.current?.readyState)
+            toast.error(`WebSocket is not open. Current state: ${ws.current?.readyState}`)
+            console.log('WebSocket is not open. Current state:', ws.current?.readyState)
         }
     }, [])
 

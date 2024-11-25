@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import ChatRoom from './components/ChatRoom'
 import JoinCreate from './components/JoinCreate'
 import { useWebSocket } from './hooks/useWebSocket'
+import { toast } from 'sonner'
 
 export default function Home() {
   const [roomId, setRoomId] = useState<string | null>(null)
@@ -14,7 +15,8 @@ export default function Home() {
       if (lastMessage.type === 'roomJoined') {
         setRoomId(lastMessage.payload.roomId)
       } else if (lastMessage.type === 'error') {
-        console.error('Error:', lastMessage.payload.message)
+        toast.error(`Error: ${lastMessage.payload.message}`)
+        console.log('Error:', lastMessage.payload.message)
       }
     }
   }, [lastMessage])
