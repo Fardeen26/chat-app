@@ -17,35 +17,39 @@ export default function JoinCreate({ connectionStatus, onCreateRoom, onJoinRoom 
     }
 
     return (
-        <div className="space-y-4">
-            <div>Connection status: {connectionStatus}</div>
-            <button
-                onClick={onCreateRoom}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                disabled={connectionStatus !== 'connected'}
-            >
-                Create Room
-            </button>
-            {currentRoomId && (
-                <div className="mt-2 p-2 bg-green-100 border border-green-400 text-green-700 rounded">
-                    Room created! Code: {currentRoomId}
-                </div>
-            )}
-            <div className="flex space-x-2">
+        <div className="space-y-4 w-[40vw] max-sm:w-full">
+            <div className='text-sm'>Connection status: {connectionStatus}</div>
+            <div className="flex flex-col space-y-2 pb-4">
                 <input
                     type="text"
                     placeholder="Room Code"
                     value={roomCode}
                     onChange={(e) => setRoomCode(e.target.value)}
-                    className="border-2 border-gray-300 bg-white h-10 px-5 rounded-lg text-sm focus:outline-none"
+                    className="border border-gray-300 bg-black h-10 px-5 rounded-lg text-sm focus:outline-none"
                 />
                 <button
                     onClick={handleJoinRoom}
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                    className="bg-white hover:bg-gray-200 text-black py-2 px-4 rounded max-sm:rounded-lg"
                     disabled={connectionStatus !== 'connected'}
                 >
                     Join Room
                 </button>
+            </div>
+            <hr className='opacity-30 rounded-full' />
+            <div className="pt-4 text-center">
+                <button
+                    onClick={onCreateRoom}
+                    className="hover:bg-[#1E41B2] bg-blue-600 w-full text-white py-2 px-4 rounded max-sm:rounded-lg"
+                    disabled={connectionStatus !== 'connected'}
+                >
+                    Create Room
+                </button>
+                {currentRoomId && (
+                    <div className="mt-2 p-2 rounded flex flex-col">
+                        <span className='opacity-70 text-sm'>You can share this code to anyone to join the room</span>
+                        <span className="text-xl font-semibold">{currentRoomId}</span>
+                    </div>
+                )}
             </div>
         </div>
     )
