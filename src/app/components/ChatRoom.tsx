@@ -35,15 +35,14 @@ export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSend
     }
 
     return (
-        <div className="w-full max-w-md">
-            <h2 className="text-2xl font-bold mb-4">Room: {roomId}</h2>
-            <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                <div className="mb-4 h-64 overflow-y-auto">
+        <div className="w-full h-full max-w-2xl">
+            <h2 className="mb-4 border py-2 px-4 rounded-lg">Room Code: {roomId}</h2>
+            <div className="pt-6">
+                <div className="mb-4 h-[60vh] flex flex-col pb-2 overflow-y-auto">
                     {messages.map((msg, index) => (
-                        <div key={index} className="mb-2">
-                            <span className="font-bold">{msg.userId}: </span>
-                            {msg.message}
-                        </div>
+                        // <div key={index} className="mb-2">
+                        <span key={index} className='bg-white w-fit px-4 mr-1 rounded-xl h-fit p-2 mt-2 text-black'>{msg.message}</span>
+
                     ))}
                 </div>
                 <div className="flex">
@@ -51,13 +50,13 @@ export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSend
                         type="text"
                         value={inputMessage}
                         onChange={(e) => setInputMessage(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        onKeyUp={(e) => e.key === 'Enter' && handleSendMessage()}
+                        className="w-full border border-gray-300 bg-black h-10 px-5 rounded-lg text-sm focus:outline-none"
                         placeholder="Type a message..."
                     />
                     <button
                         onClick={handleSendMessage}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+                        className="hover:bg-[#1E41B2] bg-blue-600 text-white py-2 px-4 rounded-lg ml-2"
                     >
                         Send
                     </button>

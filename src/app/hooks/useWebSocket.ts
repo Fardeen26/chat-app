@@ -38,7 +38,7 @@ export function useWebSocket() {
 
         ws.current.onerror = (error) => {
             toast.error(`WebSocket error: ${error}`)
-            console.error('WebSocket error:', error)
+            console.log('WebSocket error:', error)
             setConnectionStatus('disconnected')
         }
 

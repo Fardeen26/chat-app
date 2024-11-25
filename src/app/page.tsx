@@ -41,8 +41,8 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 max-sm:p-4">
-      <h1 className="text-5xl max-sm:text-4xl font-bold mb-8">Chat Application</h1>
+    <main className="flex min-h-screen flex-col items-center justify-center p-0 max-sm:p-4">
+      <h1 className="text-4xl font-bold mb-8">Chat Application</h1>
       {roomId ? (
         <>
           <ChatRoom
@@ -51,12 +51,12 @@ export default function Home() {
             lastMessage={lastMessage}
             onSendMessage={handleSendMessage}
           />
-          <button
+          {/* <button
             onClick={handleLeaveRoom}
             className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
           >
             Leave Room
-          </button>
+          </button> */}
         </>
       ) : (
         <JoinCreate
