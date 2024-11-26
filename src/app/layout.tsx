@@ -1,20 +1,14 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import RoomIdContextProvider from "./context/RoomIdContext";
 import { Toaster } from 'sonner'
 import DarkModeProvider from "./context/DarkModeContext";
 import AppBar from "./components/AppBar";
+import { Bricolage_Grotesque } from "next/font/google";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const bricolage_grotesque_init = Bricolage_Grotesque({
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -33,7 +27,7 @@ export default function RootLayout({
 
         <RoomIdContextProvider>
           <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-white`}
+            className={`${bricolage_grotesque_init.className} dark:bg-white`}
           >
             <AppBar />
             {children}
