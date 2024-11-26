@@ -35,13 +35,13 @@ export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSend
     }
 
     return (
-        <div className="w-full h-full max-w-2xl">
+        <div className="w-full max-w-2xl">
             <h2 className="mb-4 border py-2 px-4 rounded-lg">Room Code: {roomId}</h2>
             <div className="pt-6">
                 <div className="mb-4 h-[60vh] flex flex-col pb-2 overflow-y-auto">
                     {messages.map((msg, index) => (
                         // <div key={index} className="mb-2">
-                        <span key={index} className='bg-white w-fit px-4 mr-1 rounded-xl h-fit p-2 mt-2 text-black'>{msg.message}</span>
+                        <span key={index} className='bg-white dark:bg-black dark:text-white w-fit px-4 mr-1 rounded-xl h-fit p-2 mt-2 text-black'>{msg.message}</span>
 
                     ))}
                 </div>
@@ -51,7 +51,7 @@ export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSend
                         value={inputMessage}
                         onChange={(e) => setInputMessage(e.target.value)}
                         onKeyUp={(e) => e.key === 'Enter' && handleSendMessage()}
-                        className="w-full border border-gray-300 bg-black h-10 px-5 rounded-lg text-sm focus:outline-none"
+                        className="w-full border border-gray-300 bg-black dark:bg-white dark:border-gray-700 h-10 px-5 rounded-lg text-sm focus:outline-none"
                         placeholder="Type a message..."
                     />
                     <button

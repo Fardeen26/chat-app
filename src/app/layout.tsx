@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import RoomIdContextProvider from "./context/RoomIdContext";
 import { Toaster } from 'sonner'
+import DarkModeProvider from "./context/DarkModeContext";
+import AppBar from "./components/AppBar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,14 +29,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <RoomIdContextProvider>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
-          <Toaster />
-        </body>
-      </RoomIdContextProvider>
+      <DarkModeProvider>
+
+        <RoomIdContextProvider>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-white`}
+          >
+            <AppBar />
+            {children}
+            <Toaster />
+          </body>
+        </RoomIdContextProvider>
+      </DarkModeProvider>
     </html>
   );
 }

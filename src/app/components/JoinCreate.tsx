@@ -25,17 +25,17 @@ export default function JoinCreate({ connectionStatus, onCreateRoom, onJoinRoom 
                     placeholder="Room Code"
                     value={roomCode}
                     onChange={(e) => setRoomCode(e.target.value)}
-                    className="border border-gray-300 bg-black h-10 px-5 rounded-lg text-sm focus:outline-none"
+                    className="border border-gray-300 bg-black dark:bg-white dark:border-gray-700 h-10 px-5 rounded-lg text-sm focus:outline-none"
                 />
                 <button
                     onClick={handleJoinRoom}
-                    className="bg-white hover:bg-gray-200 text-black py-2 px-4 rounded max-sm:rounded-lg"
+                    className="bg-white hover:bg-gray-200 dark:bg-black dark:text-white text-black py-2 px-4 rounded max-sm:rounded-lg"
                     disabled={connectionStatus !== 'connected'}
                 >
                     Join Room
                 </button>
             </div>
-            <hr className='opacity-30 rounded-full' />
+            <hr className='opacity-30 dark:opacity-100 rounded-full dark:bg-gray-950' />
             <div className="pt-4 text-center">
                 <button
                     onClick={onCreateRoom}
