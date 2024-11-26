@@ -5,6 +5,7 @@ import { Toaster } from 'sonner'
 import DarkModeProvider from "./context/DarkModeContext";
 import AppBar from "./components/AppBar";
 import { Bricolage_Grotesque } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react"
 
 const bricolage_grotesque_init = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({
           >
             <AppBar />
             {children}
+            <Analytics />
             <Toaster />
           </body>
         </RoomIdContextProvider>
