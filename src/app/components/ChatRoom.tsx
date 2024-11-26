@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { WebSocketMessage } from '../hooks/useWebSocket'
+import { toast } from 'sonner'
+import { CopyIcon } from 'lucide-react'
 
 interface ChatRoomProps {
     roomId: string
@@ -34,9 +36,17 @@ export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSend
         return <div>Connecting to chat room...</div>
     }
 
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(roomId);
+        toast.success("Room Code Copied successfully")
+    };
+
     return (
         <div className="w-full max-w-2xl">
-            <h2 className="mb-4 border py-2 px-4 rounded-lg">Room Code: {roomId}</h2>
+            <div className="w-full flex justify-between items-center px-4 py-2 rounded-lg border cursor-pointer">
+                <h2 className="">Room Code: {roomId}</h2>
+                <span onClick={copyToClipboard}><CopyIcon className='h-4 w-4 hover:scale-110' /></span>
+            </div>
             <div className="pt-6">
                 <div className="mb-4 h-[60vh] flex flex-col pb-2 overflow-y-auto">
                     {messages.map((msg, index) => (

@@ -31,7 +31,6 @@ export function useWebSocket() {
         }
 
         ws.current.onclose = () => {
-            toast.error('WebSocket disconnected')
             setConnectionStatus('disconnected')
             reconnectTimeoutRef.current = setTimeout(connect, 3000)
         }

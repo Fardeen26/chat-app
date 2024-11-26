@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useRoomId } from '../hooks/useRoomId'
+import { CopyIcon } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface JoinCreateProps {
     connectionStatus: string
@@ -15,6 +17,11 @@ export default function JoinCreate({ connectionStatus, onCreateRoom, onJoinRoom 
             onJoinRoom(roomCode)
         }
     }
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(currentRoomId);
+        toast.success("Room Code Copied successfully")
+    };
 
     return (
         <div className="space-y-4 w-[40vw] max-sm:w-full">
@@ -46,8 +53,12 @@ export default function JoinCreate({ connectionStatus, onCreateRoom, onJoinRoom 
                 </button>
                 {currentRoomId && (
                     <div className="mt-2 p-2 rounded flex flex-col">
-                        <span className='opacity-70 text-sm'>You can share this code to anyone to join the room</span>
-                        <span className="text-xl font-semibold">{currentRoomId}</span>
+                        <span className='opacity-70 text-sm'>Share this code with anyone to invite them to join the room</span>
+
+                        <div className="flex justify-center items-center space-x-1 mt-1 cursor-pointer" onClick={copyToClipboard}>
+                            <span className="text-xl font-semibold">{currentRoomId}</span>
+                            <span> <CopyIcon className='h-4 w-4' /> </span>
+                        </div>
                     </div>
                 )}
             </div>
