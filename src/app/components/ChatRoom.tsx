@@ -50,9 +50,7 @@ export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSend
             <div className="pt-6">
                 <div className="mb-4 h-[60vh] flex flex-col pb-2 overflow-y-auto">
                     {messages.map((msg, index) => (
-                        // <div key={index} className="mb-2">
                         <span key={index} className='bg-white dark:bg-black dark:text-white w-fit px-4 mr-1 rounded-xl h-fit p-2 mt-2 text-black'>{msg.message}</span>
-
                     ))}
                 </div>
                 <div className="flex">

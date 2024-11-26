@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { useRoomId } from './useRoomId'
@@ -19,7 +20,7 @@ export function useWebSocket() {
 
     const connect = useCallback(() => {
         console.log('Attempting to connect to WebSocket')
-        ws.current = new WebSocket(process.env.WEBSOCKET_URL ?? 'ws://localhost:8080')
+        ws.current = new WebSocket(process.env.NEXT_PUBLIC_WEBSOCKET_URL ?? '')
 
         ws.current.onopen = () => {
             console.log('WebSocket connected')
@@ -35,8 +36,7 @@ export function useWebSocket() {
             reconnectTimeoutRef.current = setTimeout(connect, 3000)
         }
 
-        ws.current.onerror = (error) => {
-            console.log('WebSocket error: ', error)
+        ws.current.onerror = () => {
             toast.error(`WebSocket error`)
             setConnectionStatus('disconnected')
         }
@@ -47,8 +47,8 @@ export function useWebSocket() {
                 toast.success('Room Created Successfully')
                 setCurrentRoomId(message.payload.roomId);
             }
-            console.log(message)
-            if (message.type == 'roomJoined') {
+
+            if (message.type == 'userJoined') {
                 toast.success('Room Joined Successfully')
             }
 
@@ -60,7 +60,6 @@ export function useWebSocket() {
         connect()
         return () => {
             if (ws.current) {
-                console.log('Closing WebSocket connection')
                 ws.current.close()
             }
             if (reconnectTimeoutRef.current) {
@@ -71,14 +70,12 @@ export function useWebSocket() {
 
     const sendMessage = useCallback((message: WebSocketMessage) => {
         if (ws.current?.readyState === WebSocket.OPEN) {
-            console.log('Sending message:', message)
             if (message.type == 'leave') {
                 setCurrentRoomId('');
             }
             ws.current.send(JSON.stringify(message))
         } else {
             toast.error(`WebSocket is not open. Current state: ${ws.current?.readyState}`)
-            console.log('WebSocket is not open. Current state:', ws.current?.readyState)
         }
     }, [])
 
