@@ -19,7 +19,7 @@ export function useWebSocket() {
 
     const connect = useCallback(() => {
         console.log('Attempting to connect to WebSocket')
-        ws.current = new WebSocket('ws://localhost:8080')
+        ws.current = new WebSocket(process.env.WEBSOCKET_URL ?? 'ws://localhost:8080')
 
         ws.current.onopen = () => {
             console.log('WebSocket connected')
@@ -31,13 +31,14 @@ export function useWebSocket() {
         }
 
         ws.current.onclose = () => {
-            console.log('WebSocket disconnected')
+            toast.error('WebSocket disconnected')
             setConnectionStatus('disconnected')
             reconnectTimeoutRef.current = setTimeout(connect, 3000)
         }
 
         ws.current.onerror = (error) => {
-            console.log('WebSocket error:', error)
+            console.log('WebSocket error: ', error)
+            toast.error(`WebSocket error`)
             setConnectionStatus('disconnected')
         }
 
