@@ -33,7 +33,7 @@ export function useWebSocket() {
 
         ws.current.onclose = () => {
             setConnectionStatus('disconnected')
-            reconnectTimeoutRef.current = setTimeout(connect, 3000)
+            reconnectTimeoutRef.current = setTimeout(connect, 6000)
         }
 
         ws.current.onerror = () => {
@@ -48,10 +48,9 @@ export function useWebSocket() {
                 setCurrentRoomId(message.payload.roomId);
             }
 
-            if (message.type == 'userJoined') {
+            if (message.type == 'roomJoined') {
                 toast.success('Room Joined Successfully')
             }
-
             setLastMessage(message)
         }
     }, [])

@@ -6,16 +6,23 @@ import { toast } from 'sonner'
 interface JoinCreateProps {
     connectionStatus: string
     onCreateRoom: () => void
-    onJoinRoom: (roomCode: string) => void
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    sendMessage: any
 }
 
-export default function JoinCreate({ connectionStatus, onCreateRoom, onJoinRoom }: JoinCreateProps) {
+export default function JoinCreate({ connectionStatus, onCreateRoom, sendMessage }: JoinCreateProps) {
     const [roomCode, setRoomCode] = useState('')
+    const [username, setUsername] = useState('')
     const { currentRoomId } = useRoomId();
+
     const handleJoinRoom = () => {
-        if (roomCode) {
-            onJoinRoom(roomCode)
+        if (!roomCode) {
+            return toast.error('Room Code required')
         }
+        if (!username) {
+            return toast.error('Username required')
+        }
+        sendMessage({ type: 'join', payload: { username, roomId: roomCode } })
     }
 
     const copyToClipboard = () => {
@@ -32,6 +39,12 @@ export default function JoinCreate({ connectionStatus, onCreateRoom, onJoinRoom 
                     placeholder="Room Code"
                     value={roomCode}
                     onChange={(e) => setRoomCode(e.target.value)}
+                    className="border border-gray-300 bg-black dark:bg-white dark:border-gray-700 h-10 px-5 rounded-lg text-sm focus:outline-none"
+                />
+                <input
+                    type="text"
+                    placeholder="Username"
+                    onChange={(e) => setUsername(e.target.value)}
                     className="border border-gray-300 bg-black dark:bg-white dark:border-gray-700 h-10 px-5 rounded-lg text-sm focus:outline-none"
                 />
                 <button

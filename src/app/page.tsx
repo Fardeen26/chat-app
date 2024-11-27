@@ -15,7 +15,8 @@ export default function Home() {
     if (lastMessage) {
       if (lastMessage.type === 'roomJoined') {
         setRoomId(lastMessage.payload.roomId)
-      } else if (lastMessage.type === 'error') {
+      }
+      else if (lastMessage.type === 'error') {
         toast.error(`Error: ${lastMessage.payload.message}`)
         console.log('Error:', lastMessage.payload.message)
       }
@@ -26,14 +27,10 @@ export default function Home() {
     sendMessage({ type: 'create', payload: {} })
   }
 
-  const handleJoinRoom = (roomCode: string) => {
-    sendMessage({ type: 'join', payload: { roomId: roomCode } })
-  }
-
-  const handleLeaveRoom = () => {
-    setRoomId(null)
-    sendMessage({ type: 'leave', payload: {} })
-  }
+  // const handleLeaveRoom = () => {
+  //   setRoomId(null)
+  //   sendMessage({ type: 'leave', payload: {} })
+  // }
 
   const handleSendMessage = (message: string) => {
     if (roomId) {
@@ -55,18 +52,12 @@ export default function Home() {
             lastMessage={lastMessage}
             onSendMessage={handleSendMessage}
           />
-          {/* <button
-            onClick={handleLeaveRoom}
-            className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Leave Room
-          </button> */}
         </>
       ) : (
         <JoinCreate
           connectionStatus={connectionStatus}
           onCreateRoom={handleCreateRoom}
-          onJoinRoom={handleJoinRoom}
+          sendMessage={sendMessage}
         />
       )}
     </main>

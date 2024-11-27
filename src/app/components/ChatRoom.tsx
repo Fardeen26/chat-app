@@ -11,7 +11,7 @@ interface ChatRoomProps {
 }
 
 interface Message {
-    userId: string;
+    username: string;
     message: string;
 }
 
@@ -56,16 +56,16 @@ export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSend
             </div>
             <div className="pt-6">
                 <div
-                    className="mb-4 h-[60vh] flex flex-col pb-2 overflow-y-auto"
+                    className="mb-4 h-[60vh] flex flex-col pb-2 overflow-y-auto overflow-x-hidden"
                     ref={chatBoxRef}
                 >
                     {messages.map((msg, index) => (
-                        <span
-                            key={index}
-                            className='bg-white dark:bg-black dark:text-white w-fit px-4 mr-1 rounded-xl h-fit p-2 mt-2 text-black'
-                        >
-                            {msg.message}
-                        </span>
+                        <div key={index} className="flex flex-col mb-2">
+                            <span className="text-xs">{msg.username}</span>
+                            <span className='bg-white break-words dark:bg-black dark:text-white w-fit px-4 mr-1 rounded-xl h-fit p-2 mt-1 text-black'>
+                                {msg.message}
+                            </span>
+                        </div>
                     ))}
                 </div>
                 <div className="flex">
