@@ -1,44 +1,51 @@
-import { useState, useEffect } from 'react'
-import { WebSocketMessage } from '../hooks/useWebSocket'
-import { toast } from 'sonner'
-import { CopyIcon } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react';
+import { WebSocketMessage } from '../hooks/useWebSocket';
+import { toast } from 'sonner';
+import { CopyIcon } from 'lucide-react';
 
 interface ChatRoomProps {
-    roomId: string
-    connectionStatus: string
-    lastMessage: WebSocketMessage | null
-    onSendMessage: (message: string) => void
+    roomId: string;
+    connectionStatus: string;
+    lastMessage: WebSocketMessage | null;
+    onSendMessage: (message: string) => void;
 }
 
 interface Message {
-    userId: string
-    message: string
+    userId: string;
+    message: string;
 }
 
 export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSendMessage }: ChatRoomProps) {
-    const [messages, setMessages] = useState<Message[]>([])
-    const [inputMessage, setInputMessage] = useState('')
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [inputMessage, setInputMessage] = useState('');
+    const chatBoxRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (lastMessage && lastMessage.type === 'chat') {
-            setMessages((prevMessages) => [...prevMessages, lastMessage.payload])
+            setMessages((prevMessages) => [...prevMessages, lastMessage.payload]);
         }
-    }, [lastMessage])
+    }, [lastMessage]);
+
+    useEffect(() => {
+        if (chatBoxRef.current) {
+            chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+        }
+    }, [messages]);
 
     const handleSendMessage = () => {
         if (inputMessage.trim() && connectionStatus === 'connected') {
-            onSendMessage(inputMessage.trim())
-            setInputMessage('')
+            onSendMessage(inputMessage.trim());
+            setInputMessage('');
         }
-    }
+    };
 
     if (connectionStatus !== 'connected') {
-        return <div>Connecting to chat room...</div>
+        return <div>Connecting to chat room...</div>;
     }
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(roomId);
-        toast.success("Room Code Copied successfully")
+        toast.success("Room Code Copied successfully");
     };
 
     return (
@@ -48,9 +55,17 @@ export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSend
                 <span onClick={copyToClipboard}><CopyIcon className='h-4 w-4 hover:scale-110' /></span>
             </div>
             <div className="pt-6">
-                <div className="mb-4 h-[60vh] flex flex-col pb-2 overflow-y-auto">
+                <div
+                    className="mb-4 h-[60vh] flex flex-col pb-2 overflow-y-auto"
+                    ref={chatBoxRef}
+                >
                     {messages.map((msg, index) => (
-                        <span key={index} className='bg-white dark:bg-black dark:text-white w-fit px-4 mr-1 rounded-xl h-fit p-2 mt-2 text-black'>{msg.message}</span>
+                        <span
+                            key={index}
+                            className='bg-white dark:bg-black dark:text-white w-fit px-4 mr-1 rounded-xl h-fit p-2 mt-2 text-black'
+                        >
+                            {msg.message}
+                        </span>
                     ))}
                 </div>
                 <div className="flex">
@@ -71,6 +86,5 @@ export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSend
                 </div>
             </div>
         </div>
-    )
+    );
 }
-
