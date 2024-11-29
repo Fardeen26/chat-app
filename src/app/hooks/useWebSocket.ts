@@ -48,6 +48,10 @@ export function useWebSocket() {
                 setCurrentRoomId(message.payload.roomId);
             }
 
+            if (message.type == 'rooms') {
+                console.log(message)
+            }
+
             if (message.type == 'roomJoined') {
                 toast.success('Room Joined Successfully')
             }
