@@ -26,6 +26,8 @@ export default function Home() {
       if (lastMessage.type == 'rooms') {
         if (!lastMessage.payload.rooms.length) {
           toast.info('No rooms found')
+        } else {
+          toast.success('Rooms fetched successfully')
         }
         setRooms(lastMessage.payload.rooms)
       }

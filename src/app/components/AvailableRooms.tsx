@@ -21,11 +21,11 @@ export default function AvailableRooms({ rooms, sendMessage }: { rooms: Room[], 
         <div className='w-full flex flex-wrap justify-center gap-4 pb-5 px-40 max-sm:px-4'>
             {
                 rooms ? rooms.map((room: Room, idx) => (
-                    <article className="w-[42vw] max-sm:w-full dark:bg-black bg-white rounded-3xl border border-gray-100" key={idx}>
-                        <div className="p-6 space-y-4">
-                            <header className='flex justify-between'>
-                                <h2 className="text-[15px] font-normal dark:text-white text-black">Room Code</h2>
-                                <div className="flex items-center justify-center gap-2 dark:text-white text-black">
+                    <article className="w-[40vw] max-sm:w-full bg-transparent rounded-xl border dark:border-gray-500 border-gray-600" key={idx}>
+                        <div className="p-6 space-y-3">
+                            <header className='flex justify-between border-gray-600 dark:text-black'>
+                                <h2 className="text-[15px] font-normal ">Room Code</h2>
+                                <div className="flex items-center justify-center gap-2">
                                     <span>
                                         <UsersRoundIcon className='h-4 w-4' />
                                     </span>
@@ -37,7 +37,7 @@ export default function AvailableRooms({ rooms, sendMessage }: { rooms: Room[], 
 
                             <main className="space-y-4">
                                 <div
-                                    className="font-mono text-2xl tracking-wider font-bold bg-gray-100 text-black rounded-2xl p-2 text-center"
+                                    className="font-mono text-2xl tracking-wider font-bold border dark:border-gray-500 border-gray-600 dark:text-black text-white rounded p-1 text-center"
                                     aria-label={`Room code: ${room.id}`}
                                 >
                                     {room.id}
@@ -51,10 +51,10 @@ export default function AvailableRooms({ rooms, sendMessage }: { rooms: Room[], 
                                     type="text"
                                     placeholder="Username"
                                     onChange={(e) => setUsername(e.target.value)}
-                                    className="border border-black text-black w-full px-4 py-2 rounded-xl mb-3"
+                                    className="border border-black text-black w-full px-4 py-2 rounded-lg mb-3 placeholder:text-black"
                                 />
                                 <button
-                                    className="w-full h-11 font-normal dark:text-black text-white bg-black dark:bg-white rounded-xl transition-colors hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                                    className="w-full h-11 font-normal hover:bg-green-600 text-black bg-green-500 rounded-lg transition-colors focus:outline-none focus:ring-offset-2"
                                     onClick={() => handleJoinRoom(room.id)}
                                 >
                                     Join Room
