@@ -25,7 +25,7 @@ export default function Home() {
     if (lastMessage) {
       if (lastMessage.type == 'rooms') {
         if (!lastMessage.payload.rooms.length) {
-          toast.info('No rooms available')
+          toast.info('No rooms found')
         }
         setRooms(lastMessage.payload.rooms)
       }
@@ -34,7 +34,6 @@ export default function Home() {
       }
       else if (lastMessage.type === 'error') {
         toast.error(`Error: ${lastMessage.payload.message}`)
-        console.log('Error:', lastMessage.payload.message)
       }
     }
   }, [lastMessage])

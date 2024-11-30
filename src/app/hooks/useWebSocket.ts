@@ -19,11 +19,9 @@ export function useWebSocket() {
     const { setCurrentRoomId } = useRoomId();
 
     const connect = useCallback(() => {
-        console.log('Attempting to connect to WebSocket')
         ws.current = new WebSocket(process.env.NEXT_PUBLIC_WEBSOCKET_URL ?? '')
 
         ws.current.onopen = () => {
-            console.log('WebSocket connected')
             setConnectionStatus('connected')
             if (reconnectTimeoutRef.current) {
                 clearTimeout(reconnectTimeoutRef.current)
@@ -46,10 +44,6 @@ export function useWebSocket() {
             if (message.type == 'roomCreated') {
                 toast.success('Room Created Successfully')
                 setCurrentRoomId(message.payload.roomId);
-            }
-
-            if (message.type == 'rooms') {
-                console.log(message)
             }
 
             if (message.type == 'roomJoined') {

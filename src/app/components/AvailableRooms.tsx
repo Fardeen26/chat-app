@@ -14,8 +14,6 @@ export default function AvailableRooms({ rooms, sendMessage }: { rooms: Room[], 
         if (!username) {
             return toast.error('Username required')
         }
-        console.log("username", username)
-        console.log("roomCode", roomCode)
         sendMessage({ type: 'join', payload: { username, roomId: roomCode } })
     }
 
