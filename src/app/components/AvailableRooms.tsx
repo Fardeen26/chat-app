@@ -51,7 +51,7 @@ export default function AvailableRooms({ rooms, sendMessage }: { rooms: Room[], 
                                     type="text"
                                     placeholder="Username"
                                     onChange={(e) => setUsername(e.target.value)}
-                                    className="border border-black text-black w-full px-4 py-2 rounded-lg mb-3 placeholder:text-black"
+                                    className="w-full px-4 py-2 rounded-lg mb-3 border border-gray-300 bg-black dark:bg-white dark:border-gray-700 focus:outline-none text-white dark:text-black"
                                 />
                                 <button
                                     className="w-full h-11 font-normal hover:bg-green-600 text-black bg-green-500 rounded-lg transition-colors focus:outline-none focus:ring-offset-2"

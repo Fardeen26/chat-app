@@ -90,10 +90,13 @@ export default function Home() {
             sendMessage={sendMessage}
           />
         )}
-        <div className='text-center mt-1'>
-          <button className='text-center text-sm dark:text-black text-white' onClick={fetchAvailableRooms}>See Available Rooms</button>
-        </div>
-
+        {
+          !roomId && (
+            <div className='text-center mt-1'>
+              <button className='text-center text-xs hover:scale-105 transition-all dark:text-black text-white' onClick={fetchAvailableRooms}>See Available Rooms</button>
+            </div>
+          )
+        }
       </main>
 
       {
