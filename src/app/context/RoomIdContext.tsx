@@ -1,20 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { createContext, ReactNode, useState } from "react";
 
-interface DarkModeContextType {
+interface RoomIdContextType {
     currentRoomId: string;
-    setCurrentRoomId: any;
+    setCurrentRoomId: (id: string) => void;
 }
 
-export const RoomIdContext = createContext<DarkModeContextType | null>(null)
+export const RoomIdContext = createContext<RoomIdContextType | null>(null)
 
 
-interface DarkModeProviderProps {
+interface RoomIdProviderProps {
     children: ReactNode;
 }
 
-const RoomIdContextProvider = ({ children }: DarkModeProviderProps) => {
+const RoomIdContextProvider = ({ children }: RoomIdProviderProps) => {
     const [currentRoomId, setCurrentRoomId] = useState<string>('')
 
     return (

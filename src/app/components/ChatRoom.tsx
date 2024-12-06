@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { WebSocketMessage } from '../hooks/useWebSocket';
 import { toast } from 'sonner';
 import { CopyIcon } from 'lucide-react';
+import { useUserId } from '../hooks/useUserId';
 
 interface ChatRoomProps {
     roomId: string;
@@ -13,12 +14,14 @@ interface ChatRoomProps {
 interface Message {
     username: string;
     message: string;
+    user_id: string;
 }
 
 export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSendMessage }: ChatRoomProps) {
     const [messages, setMessages] = useState<Message[]>([]);
     const [inputMessage, setInputMessage] = useState('');
     const chatBoxRef = useRef<HTMLDivElement>(null);
+    const { userId } = useUserId();
 
     useEffect(() => {
         if (lastMessage && lastMessage.type === 'chat') {
@@ -60,8 +63,8 @@ export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSend
                     ref={chatBoxRef}
                 >
                     {messages.map((msg, index) => (
-                        <div key={index} className="flex flex-col mb-2">
-                            <span className="text-xs">{msg.username}</span>
+                        <div key={index} className={`flex flex-col mb-2 ${userId === msg.user_id ? 'items-end' : 'items-start'}`}>
+                            <span className={`text-xs ${userId === msg.user_id ? 'mr-1' : 'mr-0'}`}>{msg.username}</span>
                             <span className='bg-white break-words dark:bg-black dark:text-white w-fit px-4 mr-1 rounded-xl h-fit p-2 mt-1 text-black'>
                                 {msg.message}
                             </span>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { useRoomId } from './useRoomId'
 import { toast } from 'sonner'
+import { useUserId } from './useUserId'
 
 type ConnectionStatus = 'connecting' | 'connected' | 'disconnected'
 
@@ -17,6 +18,7 @@ export function useWebSocket() {
     const ws = useRef<WebSocket | null>(null)
     const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const { setCurrentRoomId } = useRoomId();
+    const { setUserId } = useUserId()
 
     const connect = useCallback(() => {
         ws.current = new WebSocket(process.env.NEXT_PUBLIC_WEBSOCKET_URL ?? '')
@@ -47,8 +49,10 @@ export function useWebSocket() {
             }
 
             if (message.type == 'roomJoined') {
+                setUserId(message.payload.user_id)
                 toast.success('Room Joined Successfully')
             }
+
             setLastMessage(message)
         }
     }, [])
