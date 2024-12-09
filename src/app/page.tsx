@@ -100,7 +100,7 @@ export default function Home() {
       </main>
 
       {
-        !roomId && rooms.length && (
+        !roomId && rooms.length > 0 && (
           <AvailableRooms rooms={rooms} sendMessage={sendMessage} />
         )
       }
