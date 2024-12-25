@@ -1,4 +1,4 @@
-# OrbitToken
+# The Chat Haven
 
 ## 📖 Introduction
 
