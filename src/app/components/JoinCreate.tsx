@@ -39,13 +39,13 @@ export default function JoinCreate({ connectionStatus, onCreateRoom, sendMessage
                     placeholder="Room Code"
                     value={roomCode}
                     onChange={(e) => setRoomCode(e.target.value)}
-                    className="border border-gray-300 bg-black dark:bg-white dark:border-gray-700 h-10 px-5 rounded-lg text-sm focus:outline-none"
+                    className="border border-gray-300 bg-black text-white dark:bg-white dark:text-black dark:border-gray-700 h-10 px-5 rounded-lg text-sm focus:outline-none"
                 />
                 <input
                     type="text"
                     placeholder="Username"
                     onChange={(e) => setUsername(e.target.value)}
-                    className="border border-gray-300 bg-black dark:bg-white dark:border-gray-700 h-10 px-5 rounded-lg text-sm focus:outline-none"
+                    className="border border-gray-300 bg-black text-white dark:bg-white dark:text-black dark:border-gray-700 h-10 px-5 rounded-lg text-sm focus:outline-none"
                 />
                 <button
                     onClick={handleJoinRoom}
@@ -59,7 +59,7 @@ export default function JoinCreate({ connectionStatus, onCreateRoom, sendMessage
             <div className="pt-4 text-center">
                 <button
                     onClick={onCreateRoom}
-                    className="hover:bg-[#1E41B2] bg-blue-600 w-full text-white py-2 px-4 rounded max-sm:rounded-lg"
+                    className="hover:bg-[#1E41B2] bg-blue-600 w-full text-white py-2 px-4 rounded max-sm:rounded-lg transition-all duration-500"
                     disabled={connectionStatus !== 'connected'}
                 >
                     Create Room

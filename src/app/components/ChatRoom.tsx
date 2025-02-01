@@ -77,7 +77,7 @@ export default function ChatRoom({ roomId, connectionStatus, lastMessage, onSend
                         value={inputMessage}
                         onChange={(e) => setInputMessage(e.target.value)}
                         onKeyUp={(e) => e.key === 'Enter' && handleSendMessage()}
-                        className="w-full border border-gray-300 bg-black dark:bg-white dark:border-gray-700 h-10 px-5 rounded-lg text-sm focus:outline-none"
+                        className="w-full border border-gray-300 bg-black text-white dark:bg-white dark:text-black dark:border-gray-700 h-10 px-5 rounded-lg text-sm focus:outline-none"
                         placeholder="Type a message..."
                     />
                     <button

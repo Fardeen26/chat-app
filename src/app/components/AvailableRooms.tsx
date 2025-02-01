@@ -42,8 +42,6 @@ export default function AvailableRooms({ rooms, sendMessage }: { rooms: Room[], 
                                 >
                                     {room.id}
                                 </div>
-
-
                             </main>
 
                             <footer>
@@ -51,10 +49,10 @@ export default function AvailableRooms({ rooms, sendMessage }: { rooms: Room[], 
                                     type="text"
                                     placeholder="Username"
                                     onChange={(e) => setUsername(e.target.value)}
-                                    className="w-full px-4 py-2 rounded-lg mb-3 border border-gray-300 bg-black dark:bg-white dark:border-gray-700 focus:outline-none text-white dark:text-black"
+                                    className="w-full px-4 text-sm py-2 rounded-lg mb-3 border border-gray-300 bg-black text-white dark:bg-white dark:text-black dark:border-gray-700 focus:outline-none"
                                 />
                                 <button
-                                    className="w-full h-11 font-normal hover:bg-green-600 text-black bg-green-500 rounded-lg transition-colors focus:outline-none focus:ring-offset-2"
+                                    className="w-full h-10 text-sm font-normal hover:bg-green-600 text-black bg-green-500 rounded-lg transition-all duration-300 focus:outline-none focus:ring-offset-2"
                                     onClick={() => handleJoinRoom(room.id)}
                                 >
                                     Join Room
